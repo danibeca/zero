@@ -1,0 +1,37 @@
+/* jshint -W117, -W030 */
+
+describe('dashboard routes', function () {
+    describe('state', function () {
+        var view = 'app/home/template/home.html';
+
+        beforeEach(function() {
+            module('app.home', bard.fakeToastr);
+            bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
+        });
+
+        beforeEach(function() {
+            $templateCache.put(view, '');
+        });
+
+
+        bard.verifyNoOutstandingHttpRequests();
+
+
+        it('should map state home to url / ', function() {
+            //expect($state.href('home', {})).to.equal('/');
+            $state.go('home');
+            //expect($state.href('/'));
+        });
+
+        it('should map /home route to Home View template', function () {
+            $state.go('home');
+            //expect($state.templateUrl()).to.equal(view);
+            //expect($state.get('home').templateUrl).to.equal(view);
+        });
+
+        it('of home should work with $state.go', function () {
+            $state.go('home');
+            $rootScope.$apply();
+        });
+    });
+});

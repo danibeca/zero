@@ -1,0 +1,10 @@
+{
+  "PAGE_TITLE": "Ingresa a tu cuenta",
+  "EMAIL_REQUIRED": "El email es requerido",
+  "PASS_REQUIRED": "El password es requerido",
+  "EMAIL_TITLE": "Email",
+  "PASS_TITLE": "Password",
+  "REMEMBERME": "Recuerdame",
+  "FORGOTPASS": "Olvido su password",
+  "SUBMIT_CREDENTIALS": "Ingresar"
+}
