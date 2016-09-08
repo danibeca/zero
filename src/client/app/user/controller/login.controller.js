@@ -6,31 +6,30 @@
         .controller('LoginController', LoginController);
 
     /* @ngInject */
-    function LoginController(logger, auth, user) {
+    function LoginController(logger, auth, $state, $filter) {
         var vm = this;
-        vm.dataLoading = false;
         vm.login = login;
 
-        activate();
-
-        function activate() {
-            logger.info('Activated Login View');
-        }
-
         function login() {
-            vm.dataLoading = true;
             auth.getLogin(vm.credential)
-                .then(getLoginComplete);
+                .then(success)
+                .catch(fail);
 
-            function getLoginComplete(data) {
+
+            function success(data) {
                 vm.dataLoading = false;
                 if (data) {
-                    user.setUser(data);
-                    logger.success('Login realizado');
+                    logger.success($filter('translate')('LOGIN_SUCCESS'));
                 } else {
-                    logger.error('Email o password invalidos');
+                    logger.error($filter('translate')('LOGIN_FAILED'));
                 }
             }
+
+            function fail() {
+                logger.error($filter('translate')('LOGIN_INTERNAL_ERROR'));
+            }
+
+
         }
     }
 })();

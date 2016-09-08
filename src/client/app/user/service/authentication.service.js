@@ -6,7 +6,7 @@
         .factory('auth', auth);
 
     /* @ngInject */
-    function auth($http, environmentConfig, $window) {
+    function auth($http, environmentConfig, $window, user) {
         var service = {
             getLogin: getLogin
         };
@@ -19,8 +19,10 @@
                 .catch(fail);
 
             function success(response) {
-                $window.sessionStorage.token = response.data.token;
-                return response.data;
+                var result = response.data;
+                $window.sessionStorage.token = result.token;
+                user.setUser(result);
+                return result;
             }
 
             function fail() {

@@ -32,7 +32,7 @@
                 msg = JSON.parse(rejection.data).message;
             }
             msg = msg + ': ' + rejection.config.url;
-            toastr.error(msg);
+            //toastr.error(msg);
             if (rejection.status === 401) {
                 $injector.get('$state').transitionTo('login');
             }

@@ -6,5 +6,8 @@
   "PASS_TITLE": "Password",
   "REMEMBERME": "Recuerdame",
   "FORGOTPASS": "Olvido su password",
-  "SUBMIT_CREDENTIALS": "Ingresar"
+  "SUBMIT_CREDENTIALS": "Ingresar",
+  "LOGIN_FAILED": "Credenciales erradas",
+  "LOGIN_SUCCESS": "Ingreso realizado",
+  "LOGIN_INTERNAL_ERROR": "Ha ocurrido un error inesperado, intente mas tarde"
 }
