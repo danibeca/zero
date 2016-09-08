@@ -7,7 +7,7 @@
         .config(config);
 
     /* @ngInject */
-    function authInterceptor($q, $window, $injector, toastr) {
+    function authInterceptor($q, $window, $injector) {
         var service = {
             request: request,
             responseError: responseError

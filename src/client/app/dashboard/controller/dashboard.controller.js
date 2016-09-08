@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function DashboardController() {
+        /*jshint unused:false*/
         var vm = this;
-
     }
 })();

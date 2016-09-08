@@ -1,5 +1,5 @@
 (function () {
-    'user strict'
+    'user strict';
 
     angular.module('app.dashboard', ['app.core']);
 
