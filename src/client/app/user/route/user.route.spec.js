@@ -1,29 +1,32 @@
 /* jshint -W117, -W030 */
 
-describe('user routes', function () {
+describe('user route', function () {
     describe('state', function () {
+        var views = {
+            login: 'app/user/template/login.html'
+        };
 
         beforeEach(function() {
             module('app.user', bard.fakeToastr);
-            bard.inject('$rootScope', '$state');
+            bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
         });
 
-        bard.verifyNoOutstandingHttpRequests();
-
-        /////LOGIN ROUTE TEST
-        it('should map state login to url /login ', function() {
-            expect($state.href('login', {})).to.equal('/login');
+        beforeEach(function() {
+            $templateCache.put(views.user, '');
         });
 
-        it('should map /login route to Login View template', function () {
-            var view = 'app/user/template/login.html';
-            expect($state.get('login').templateUrl).to.equal(view);
+        it('should map /login route to Login View template ', function() {
+            expect($state.get('login').templateUrl).to.equal(views.login);
+        });
+
+        it('should map state login to url / ', function() {
+            expect($state.href('login')).to.equal('/login');
         });
 
         it('of login should work with $state.go', function () {
             $state.go('login');
             $rootScope.$apply();
-            expect($state.is('login'));
+            expect($state.current.templateUrl).to.equal(views.login);
         });
     });
 });

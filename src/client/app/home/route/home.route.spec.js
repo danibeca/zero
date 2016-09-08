@@ -1,6 +1,6 @@
 /* jshint -W117, -W030 */
 
-describe('dashboard routes', function () {
+describe('home route', function () {
     describe('state', function () {
         var view = 'app/home/template/home.html';
 
@@ -14,24 +14,18 @@ describe('dashboard routes', function () {
         });
 
 
-        bard.verifyNoOutstandingHttpRequests();
-
-
-        it('should map state home to url / ', function() {
-            //expect($state.href('home', {})).to.equal('/');
-            $state.go('home');
-            //expect($state.href('/'));
+        it('should map /home route to Home View template ', function() {
+            expect($state.get('home').templateUrl).to.equal(view);
         });
 
-        it('should map /home route to Home View template', function () {
-            $state.go('home');
-            //expect($state.templateUrl()).to.equal(view);
-            //expect($state.get('home').templateUrl).to.equal(view);
+        it('should map state home to url / ', function() {
+            expect($state.href('home')).to.equal('/');
         });
 
         it('of home should work with $state.go', function () {
             $state.go('home');
             $rootScope.$apply();
+            expect($state.current.templateUrl).to.equal(view);
         });
     });
 });
