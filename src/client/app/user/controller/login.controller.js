@@ -20,6 +20,7 @@
                 vm.dataLoading = false;
                 if (data) {
                     logger.success($filter('translate')('LOGIN_SUCCESS'));
+                    $state.go('dashboard');
                 } else {
                     logger.error($filter('translate')('LOGIN_FAILED'));
                 }

@@ -3,7 +3,8 @@
 
     angular.module('app', [
         'app.user',
-        'app.home'
+        'app.home',
+        'app.dashboard'
     ]);
 
 })();
