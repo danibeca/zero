@@ -6,12 +6,8 @@
         .controller('HomeController', HomeController);
 
     /* @ngInject */
-    function HomeController($rootScope, $translate) {
+    function HomeController() {
         /*jshint unused:false*/
         var vm = this;
-
-        $rootScope.changeLanguage = function (langKey) {
-            $translate.use(langKey);
-        };
     }
 })();
