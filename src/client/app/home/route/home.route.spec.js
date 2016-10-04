@@ -4,21 +4,21 @@ describe('home route', function () {
     describe('state', function () {
         var view = 'app/home/template/home.html';
 
-        beforeEach(function() {
+        beforeEach(function () {
             module('app.home', bard.fakeToastr);
-            bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
+            bard.inject('$httpBackend', '$rootScope', '$state', '$templateCache');
         });
 
-        beforeEach(function() {
+        beforeEach(function () {
             $templateCache.put(view, '');
         });
 
 
-        it('should map /home route to Home View template ', function() {
+        it('should map /home route to Home View template ', function () {
             expect($state.get('home').templateUrl).to.equal(view);
         });
 
-        it('should map state home to url / ', function() {
+        it('should map state home to url / ', function () {
             expect($state.href('home')).to.equal('/');
         });
 

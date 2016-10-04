@@ -15,9 +15,7 @@
                 .then(success)
                 .catch(fail);
 
-
             function success(data) {
-                vm.dataLoading = false;
                 if (data) {
                     logger.success($filter('translate')('LOGIN_SUCCESS'));
                     $state.go('dashboard');
@@ -26,11 +24,10 @@
                 }
             }
 
-            function fail() {
+            function fail(error) {
                 logger.error($filter('translate')('LOGIN_INTERNAL_ERROR'));
+                logger.error(error);
             }
-
-
         }
     }
 })();

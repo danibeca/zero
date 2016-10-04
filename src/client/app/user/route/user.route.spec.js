@@ -1,5 +1,4 @@
-/* jshint -W117, -W030 */
-
+/* jshint -W117 */
 describe('user route', function () {
     describe('state', function () {
         var views = {
@@ -8,7 +7,7 @@ describe('user route', function () {
 
         beforeEach(function() {
             module('app.user', bard.fakeToastr);
-            bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
+            bard.inject('$rootScope', '$state', '$templateCache');
         });
 
         beforeEach(function() {

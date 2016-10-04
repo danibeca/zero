@@ -6,7 +6,7 @@
         .factory('auth', auth);
 
     /* @ngInject */
-    function auth($http, environmentConfig, $window, user) {
+    function auth($http, environmentConfig, $window, $q, user) {
         var service = {
             getLogin: getLogin
         };
@@ -25,8 +25,9 @@
                 return result;
             }
 
-            function fail() {
+            function fail(error) {
                 delete $window.sessionStorage.token;
+                return $q.reject(error);
             }
         }
     }
