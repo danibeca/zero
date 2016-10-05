@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = function (config) {
     var gConfigKarma = require('./gulp_files/gulp.user.config.karma').karma();
 
     config.set({
@@ -7,7 +7,7 @@ module.exports = function(config) {
 
         // frameworks to use
         // some available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['mocha', 'chai', 'sinon', 'chai-sinon'],
+        frameworks: ['mocha', 'chai-sinon', 'sinon', 'chai-as-promised', 'chai'],
 
         // list of files / patterns to load in the browser
         files: gConfigKarma.files,

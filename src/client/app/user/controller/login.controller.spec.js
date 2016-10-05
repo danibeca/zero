@@ -3,7 +3,6 @@ describe('LoginController', function () {
     var controller;
     var user = mockData.getMockLogin();
 
-
     beforeEach(function () {
         module('app.user', bard.fakeToastr);
         bard.inject('$controller', '$log', '$rootScope', '$q', 'auth', '$state', 'routerHelper', '$timeout');
@@ -23,17 +22,26 @@ describe('LoginController', function () {
         });
 
         it('should call auth.login once', function () {
+            //Arrange
             var authMock = sinon.mock(auth);
             authMock.expects('getLogin').once().returns($q.when(user));
+
+            //Act
             controller.login();
+
+            //Assert
             authMock.restore();
             authMock.verify();
         });
 
         it('when it success', function (done) {
-            var authStub = sinon.stub(auth, 'getLogin');
-            authStub.returns($q.when(user));
+            //Arrange
+            sinon.stub(auth, 'getLogin').returns($q.when(user));
+
+            //Act
             controller.login();
+
+            //Assert
             $timeout(function () {
                 expect($log.info.logs).to.match(/LOGIN_SUCCESS/);
                 done();
@@ -42,17 +50,22 @@ describe('LoginController', function () {
 
         });
 
-        it('when it success 2', function () {
-            var authStub = sinon.stub(auth, 'getLogin');
-            authStub.returns($q.reject('Error'));
+        it('when it fail', function (done) {
+            //Arrange
+            deferred = $q.defer();
+            sinon.stub(auth, 'getLogin').returns(deferred.promise);
+
+            //Act
+            deferred.reject('Internal Error');
+            $rootScope.$apply();
             controller.login();
-            /* $timeout(function () {
-                console.log($log.info.logs);
-                expect($log.info.logs).to.match(/LOGIN_FAILED/);
+
+            //Assert
+            $timeout(function () {
+                expect($log.error.logs).to.match(/LOGIN_INTERNAL_ERROR/);
                 done();
-            }, 10000);
+            }, 1000);
             $timeout.flush();
-            */
 
         });
 
