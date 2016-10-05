@@ -1,4 +1,4 @@
-/* jshint -W079 */
+/* jshint -W079, -W109*/
 /*jshint unused:false, maxlen:false*/
 /* jscs:disable */
 var mockData = (function () {
@@ -6,6 +6,8 @@ var mockData = (function () {
         getMockStates: getMockStates,
         getMockDashboard: getMockDashboard,
         getMockLogin: getMockLogin,
+        getMockLoginRequest: getMockLoginRequest,
+        getJSONInternalError: getJSONInternalError
     };
 
     function getMockStates() {
@@ -60,6 +62,32 @@ var mockData = (function () {
                 'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvbGFyYXZlbFwvc2lnbWFcL2FwaVwvbG9naW4iLCJpYXQiOjE0NzM5MTIwMTcsImV4cCI6MTQ3MzkxNTYxNywibmJmIjoxNDczOTEyMDE3LCJqdGkiOiJmMmUyNjFkNzcwNDUwMzJlODFiMDJjMTU0NzU0Yjk5ZiJ9.LmaH6gMzLXP-Yn9EFxiNzAxWA01gDQca-ZDQOTtGXAw'
             }
         ];
+    }
+
+    function getMockLoginRequest() {
+        return [
+            {
+                'email': 'danibeca@okazo.co',
+                'password': 'testing'
+            }
+        ];
+    }
+
+    function getJSONInternalError() {
+        return getJSON('{"error": {"message": "Internal Error", "status_code": 500}}');
+    }
+
+    function getJSON(s) {
+        s = s.replace(/\\n/g, "\\n")
+            .replace(/\\'/g, "\\'")
+            .replace(/\\"/g, '\\"')
+            .replace(/\\&/g, "\\&")
+            .replace(/\\r/g, "\\r")
+            .replace(/\\t/g, "\\t")
+            .replace(/\\b/g, "\\b")
+            .replace(/\\f/g, "\\f");
+
+        return s.replace(/[\u0000-\u0019]+/g, "");
     }
 
 })();

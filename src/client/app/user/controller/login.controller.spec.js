@@ -16,58 +16,71 @@ describe('LoginController', function () {
 
     bard.verifyNoOutstandingHttpRequests();
 
-    describe('Login controller', function () {
-        it('should be created successfully', function () {
-            expect(controller).to.be.defined;
-        });
+    it('should be created successfully', function () {
+        expect(controller).to.be.defined;
+    });
 
-        it('should call auth.login once', function () {
-            //Arrange
-            var authMock = sinon.mock(auth);
-            authMock.expects('getLogin').once().returns($q.when(user));
+    it('should call auth.login once', function () {
+        //Arrange
+        var authMock = sinon.mock(auth);
+        authMock.expects('getLogin').once().returns($q.when(user));
 
-            //Act
-            controller.login();
+        //Act
+        controller.login();
 
-            //Assert
-            authMock.restore();
-            authMock.verify();
-        });
+        //Assert
+        authMock.restore();
+        authMock.verify();
+    });
 
-        it('when it success', function (done) {
-            //Arrange
-            sinon.stub(auth, 'getLogin').returns($q.when(user));
+    it('call with success the login service', function (done) {
+        //Arrange
+        sinon.stub(auth, 'getLogin').returns($q.when(user));
 
-            //Act
-            controller.login();
+        //Act
+        controller.login();
 
-            //Assert
-            $timeout(function () {
-                expect($log.info.logs).to.match(/LOGIN_SUCCESS/);
-                done();
-            }, 1000);
-            $timeout.flush();
+        //Assert
+        $timeout(function () {
+            expect($log.info.logs).to.match(/LOGIN_SUCCESS/);
+            done();
+        }, 1000);
+        $timeout.flush();
 
-        });
+    });
 
-        it('when it fail', function (done) {
-            //Arrange
-            deferred = $q.defer();
-            sinon.stub(auth, 'getLogin').returns(deferred.promise);
+    it('call with wrong credentials', function (done) {
+        //Arrange
+        sinon.stub(auth, 'getLogin').returns($q.when(false));
 
-            //Act
-            deferred.reject('Internal Error');
-            $rootScope.$apply();
-            controller.login();
+        //Act
+        controller.login();
 
-            //Assert
-            $timeout(function () {
-                expect($log.error.logs).to.match(/LOGIN_INTERNAL_ERROR/);
-                done();
-            }, 1000);
-            $timeout.flush();
+        //Assert
+        $timeout(function () {
+            expect($log.error.logs).to.match(/LOGIN_FAILED/);
+            done();
+        }, 1000);
+        $timeout.flush();
 
-        });
+    });
+
+    it('fails calling the login service', function (done) {
+        //Arrange
+        deferred = $q.defer();
+        sinon.stub(auth, 'getLogin').returns(deferred.promise);
+
+        //Act
+        deferred.reject('Internal Error');
+        $rootScope.$apply();
+        controller.login();
+
+        //Assert
+        $timeout(function () {
+            expect($log.error.logs).to.match(/LOGIN_INTERNAL_ERROR/);
+            done();
+        }, 1000);
+        $timeout.flush();
 
     });
 });
