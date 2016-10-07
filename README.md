@@ -1,4 +1,4 @@
-# AAPP
+# Zero APP
 
 ## Prerequisites
 
