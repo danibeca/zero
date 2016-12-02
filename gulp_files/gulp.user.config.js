@@ -22,10 +22,20 @@ function constants() {
         build: './build/',
         bower: bower,
         html: client + '**/*.html',
-        less: client + 'styles/styles.less',
-        lessWatch: client + 'styles/**/*.less',
+        less: client + 'styles/less/styles.less',
+        sassDashboard: [
+            client + 'styles/sass/dashboard/theme/_*.scss',
+            client + 'styles/sass/dashboard/app/_*.scss',
+            client + 'styles/sass/dashboard/theme/bootstrap-overrides/_*.scss',
+            client + 'styles/sass/dashboard/theme/components/_*.scss',
+            client + 'styles/sass/dashboard/theme/dashboard/_*.scss',
+            client + 'styles/sass/dashboard/app/maps/_*.scss',
+            client + 'styles/sass/dashboard/theme/conf/**/*.scss'
+        ],
+        sass: client + 'styles/sass/styles2.scss',
+        lessWatch: client + 'styles/less/**/*.less',
         index: client + 'index.html',
-        css: temp + 'styles.css',
+        css: temp + '**/*.css',
         js: [
             clientApp + '**/*.module.js',
             clientApp + '**/*.js',

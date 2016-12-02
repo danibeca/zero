@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -21,9 +21,13 @@
                     templateUrl: 'app/dashboard/template/dashboard.html',
                     controller: 'DashboardController',
                     controllerAs: 'vm',
-                    title: 'dashboard',
+                    title: 'Dashboard',
+                    sidebarMeta: {
+                        icon: 'ion-android-home',
+                        order: 0,
+                    },
                     resolve: {
-                        translations:  function(translateHelper) {
+                        translations: function (translateHelper) {
                             return translateHelper.addParts('dashboard');
                         }
                     }
